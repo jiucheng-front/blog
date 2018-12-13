@@ -1,5 +1,5 @@
 ### Javascript常用总结
-> Ajax 封装
+> 一、Ajax 封装
 
 ```javascript
 	
@@ -138,5 +138,17 @@
 ```
 
 
+> 二、判断是否是IOS
 
+```javascript
+
+	function isIos() {
+	    var u = navigator.userAgent,
+	        app = navigator.appVersion;
+	    //ios终端
+	    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+	    return isiOS;
+	}
+
+```
 
