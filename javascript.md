@@ -152,3 +152,33 @@
 
 ```
 
+> 三、关于原生JS操作className
+
+```javascript
+
+	/**
+	 * 1：是否含有某个class,返回：true/false
+	 * 2：没有指定的className就追加指定的className
+	 * 3：有指定的className就删除指定的className
+	 * @param {*} elem 必须，原生DOM 
+	 * @param {*} cls 必须，String,指定的className
+	 */
+	// 1、是否函数指定的className
+	function hasClass(elem, cls) {
+	    return elem.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
+	}
+	// 2、没有就追加指定className
+	function addClass(elem, cls) {
+	    if (!hasClass(elem, cls)) {
+	        elem.className += " " + cls;
+	    }
+	}
+	// 3、有就移除指定className
+	function removeClass(elem, cls) {
+	    if (hasClass(elem, cls)) {
+	        var reg = new RegExp('(\\s|^)' + cls + '(\\s|$)');
+	        elem.className = elem.className.replace(reg, "");
+	    }
+	}
+
+```
