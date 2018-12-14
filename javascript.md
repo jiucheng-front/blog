@@ -182,3 +182,27 @@
 	}
 
 ```
+
+> DOM操作
+
+```javascript
+
+	/**
+	 * 四、DOM操作
+	 * 
+	 */
+	// 4.1封装指定符号获取DOM
+	window.$ = HTMLElement.prototype.$ = function(selector) {
+	    return (this == window ? document : this).querySelectorAll(selector);
+	}
+	// 4.2根据ID获取指定DOM
+	function getEleId(id) {
+	    return document.getElementById(id);
+	}
+	// 4.3 向指定DOM追加HTML,id,html都是必须
+	function pushHtml(id, html) {
+	    return document.getElementById(id).innerHTML = html;
+	}
+
+
+```
