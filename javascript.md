@@ -183,14 +183,10 @@
 
 ```
 
-> DOM操作
+> 四、DOM操作
 
 ```javascript
 
-	/**
-	 * 四、DOM操作
-	 * 
-	 */
 	// 4.1封装指定符号获取DOM
 	window.$ = HTMLElement.prototype.$ = function(selector) {
 	    return (this == window ? document : this).querySelectorAll(selector);
@@ -203,6 +199,32 @@
 	function pushHtml(id, html) {
 	    return document.getElementById(id).innerHTML = html;
 	}
+
+
+```
+
+> 五、封装綁定事件
+
+```javascript
+
+	/**
+	 * @param {*} type 必须，绑定事件类型
+	 * @param {*} selector 必须，nodeName / className / id
+	 * @param {*} callback 必须，绑定成功后的回调，继续操作DOM
+	 */
+	function on(type, selector, callback) {
+	    document.addEventListener(type, function(e) {
+	        e.preventDefault();
+	        e.stopPropagation();
+	        if (selector == e.target.tagName.toLowerCase() || selector == e.target.className || selector == e.target.id) {
+	            callback(e);
+	        }
+	    })
+	}
+	// Example
+	on("click", "btn", function() {
+	    console.log("给btn按钮绑定了点击事件")
+	})
 
 
 ```
