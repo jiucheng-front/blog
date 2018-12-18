@@ -271,3 +271,32 @@
 	}
 
 ```
+
+> 七、获取URL中指定某个参数的值
+
+```javascript
+
+	/**
+	 * 
+	 * @param {*} strParame 必须,string，返回指定的值
+	 * 
+	 */
+	function getUrlParameter(strParame) {
+	    var args = new Object();
+	    var query = location.search.substring(1);
+	    var pairs = query.split("&");
+	    for (var i = 0; i < pairs.length; i++) {
+	        var pos = pairs[i].indexOf('=');
+	        if (pos == -1) continue;
+	        var argname = pairs[i].substring(0, pos);
+	        var value = pairs[i].substring(pos + 1);
+	        value = decodeURIComponent(value);
+	        args[argname] = value;
+	    }
+	    return args[strParame];
+	}
+	// Example	"dsaldlas.csadja.com/fhlfh.html?key=10&id=hello";
+	var key = getUrlParameter("key"); //10
+	var id = getUrlParameter("hello"); //10
+
+```
