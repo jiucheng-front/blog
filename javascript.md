@@ -228,3 +228,46 @@
 
 
 ```
+
+> 六 、原生JS获取之前(prevAll)或者之后(nextAll)的所有兄弟元素
+
+```javascript
+
+	/**
+	 * 
+	 * 	类似JQ的 prevAll和nextAll
+	 */
+	HTMLElement.prototype.prevAll = function() {
+	    var parent = this.parentElement;
+	    var children = parent.children;
+	    var arr = [];
+	    for (var i = 0; i < children.length; i++) {
+	        var previous = children[i];
+	        if (previous == this) {
+	            break;
+	        }
+	        arr.push(previous);
+	    }
+	    return arr;
+	}
+	
+	HTMLElement.prototype.nextAll = function() {
+	    var parent = this.parentElement;
+	    var children = parent.children;
+	    var arr = [];
+	    for (var i = children.length - 1; i >= 0; i--) {
+	        var nexts = children[i];
+	        if (nexts == this) {
+	            break;
+	        }
+	        arr.unshift(nexts);
+	    }
+	    return arr;
+	}
+	// Example
+	var temp = function(dom) {
+	    console.log("prevAll=", dom.prevAll());
+	    console.log("nextAll=", dom.nextAll());
+	}
+
+```
