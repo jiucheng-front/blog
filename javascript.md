@@ -382,3 +382,65 @@
 	}
 
 ```
+
+> 十一、操作数字
+
+```javascript
+
+	// 1 转换为万或者千万，最大支持千万
+	function numberToMillion(count) {
+	    var end = '';
+	    count = count.toString();
+	    var length = count.length;
+	    if (length >= 6 && length < 9) {
+	        end = (count / 10000).toFixed(1);
+	        var index = end.indexOf(".");
+	        var last = end.slice(index + 1);
+	        if (!Number(last)) {
+	            end = end.slice(0, index);
+	        }
+	        end = end + "萬";
+	    } else if (length >= 9) {
+	        end = (count / 10000000).toFixed(1);
+	        var index = end.indexOf(".");
+	        var last = end.slice(index + 1);
+	        if (!Number(last)) {
+	            end = end.slice(0, index);
+	        }
+	        end = end + "千萬";
+	    } else if (length < 6) {
+	        end = count;
+	    }
+	    return end;
+	}
+	// Example
+	numberToMillion(12346589) // => "1234.7萬"
+
+
+	// 2 转换为带K(或者指定符号)
+	function numberToK(count) {
+	    var end = '';
+	    count = count.toString();
+	    return end = count.length > 4 ? (count / 1000).toFixed(1) + "K" : count;
+	}
+	// Example
+	numberToK(456798) // => "456.8K"
+	
+	// 3 从尾部每三位用符号隔开
+	function numberWithComma(num) {
+	    var num = (num || 0).toString(),
+	        result = '';
+	    while (num.length > 3) {
+	        result = ',' + num.slice(-3) + result;
+	        num = num.slice(0, num.length - 3);
+	    }
+	    if (num) {
+	        result = num + result;
+	    }
+	    return result;
+	}
+	// Example 
+	numberWithComma(4567889798) // => "4,567,889,798"
+
+
+```
