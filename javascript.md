@@ -444,3 +444,61 @@
 
 
 ```
+
+> 十二、限制按钮点击
+
+```javascript
+
+	/**
+	 * 
+	 *  repeat(id,num) @param {id:"String",哪個按鈕的點擊；num:"Number",多少秒后可以點擊}
+	 * 
+	 */
+	const CAN_STORE = {
+	    repeatTemp: [],
+	    initTime: function() {
+	        return new Date().getTime();
+	    }
+	}
+	const CAN_IS_REPEAT = {
+	    repeat: function(id, num) {
+	        /**
+	         *  id ：string,標識符，哪個點擊事件
+	         *  num : 整數 t秒內只可以點擊一次
+	         *  num 不存在，限制执行频率，默认为60秒 允许执行时返回false  毫秒
+	         */
+	        let t = num ? num * 1000 : 60000;
+	        let time = CAN_STORE.initTime()
+	        if (!CAN_STORE.repeatTemp[id]) {
+	            CAN_STORE.repeatTemp[id] = time
+	            //允许
+	            return false
+	        } else {
+	            let ts = t - (time - CAN_STORE.repeatTemp[id]);
+	            ts = parseInt(ts / 1000)
+	            if (ts > 0) {
+	                //禁止执行
+	                return true
+	            } else {
+	                //更新时间
+	                CAN_STORE.repeatTemp[id] = time
+	                //允许
+	                return false
+	            }
+	        }
+	    }
+	}
+	
+	function canClick() {
+	    // 3 秒內只能點擊一次
+	    let isRepeat = CAN_IS_REPEAT.repeat("repeat", 3)
+	    if (!isRepeat) {
+	        // 正常todo
+	    } else {
+	        // 操作頻繁
+	    }
+	}
+	// Example
+	document.getElementById("btn").addEventListener("click", canClick)
+
+```
