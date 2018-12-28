@@ -362,3 +362,23 @@
 	console.log(dePwd); //BLUE123456!
 
 ```
+
+> 十、判断两个数组是否相等
+
+```javascript
+
+	/**
+	 * @param {*} arr1 必须，Array 
+	 * @param {*} arr2 必须，Array
+	 * 返回：true/false
+	 */
+	function arrayEqual(arr1, arr2) {
+	    if (arr1 === arr2) return true;
+	    if (arr1.length != arr2.length) return false;
+	    for (var i = 0; i < arr1.length; ++i) {
+	        if (arr1[i] !== arr2[i]) return false;
+	    }
+	    return true;
+	}
+
+```
