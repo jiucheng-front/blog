@@ -502,3 +502,54 @@
 	document.getElementById("btn").addEventListener("click", canClick)
 
 ```
+
+> 十三、计算2个标准日期的时间差，或者剩余时间
+
+```javascript
+
+	/**
+	 * 
+	 * timeToMillion(startStr, endStr)
+	 * @param {startStr} 必须，endStr不存在时候是>0的秒数，endStr存在的时候startStr必须是标准时间格式且小于endStr
+	 * @param {endStr} 可选，如果存在必须是标准时间格式且大于startStr
+	 */
+	function timeToMillion(startStr, endStr) {
+	    var times;
+	    if (endStr) {
+	        var startT = new Date(startStr).getTime()
+	        var endT = new Date(endStr).getTime()
+	        times = (endT - startT) / 1000
+	    } else if (startStr && startStr != 0) {
+	        times = startStr
+	    }
+	    var day, hour, minute, endOutStr;
+	    if (times > 0) {
+	        // console.log(times)
+	        day = Math.floor(times / (60 * 60 * 24));
+	        hour = Math.floor(times / (60 * 60)) - (day * 24);
+	        minute = Math.floor(times / 60) - (day * 24 * 60) - (hour * 60);
+	        // second = Math.floor(times) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
+	
+	        if (parseInt(day) != 0) {
+	            endOutStr = day + "天" + hour + "小時" + minute + "分鐘"
+	        } else {
+	            if (parseInt(hour) != 0) {
+	                endOutStr = hour + "小時" + minute + "分鐘"
+	            } else {
+	                endOutStr = minute + "分鐘"
+	            }
+	        }
+	    } else {
+	        endOutStr = 0
+	    }
+	    // if (day <= 9) day = '0' + day;
+	    // if (hour <= 9) hour = '0' + hour;
+	    // if (minute <= 9) minute = '0' + minute;
+	    // if (second <= 9) second = '0' + second;
+	    return endOutStr
+	}
+	// Example
+	timeToMillion(9613920) // => "111天6小時32分鐘"
+	timeToMillion("2017-11-20 13:58:47", "2017-11-22 15:09:10") // => "2天1小時10分鐘"
+
+```
